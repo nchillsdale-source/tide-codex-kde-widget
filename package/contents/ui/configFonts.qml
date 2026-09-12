@@ -30,6 +30,7 @@ ScrollView {
     }
     ColumnLayout {
         width: page.availableWidth; spacing: 18
+        Label { Layout.leftMargin: 16; Layout.topMargin: 12; text: "Typography"; font.bold: true; font.pointSize: 18 }
         Label {
             Layout.fillWidth: true; Layout.margins: 12; wrapMode: Text.WordWrap
             text: "By default Tide follows KDE’s system font. A custom font applies only to this widget. The Display tab’s text scaling still applies on top of the selected base size."

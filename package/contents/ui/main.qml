@@ -43,9 +43,9 @@ PlasmoidItem {
     Component.onCompleted: refresh()
     fullRepresentation: Dashboard {
         Layout.minimumWidth: root.config.displayStyle === 4 ? (root.config.meterOnly ? 140 : 260) * Math.max(1, root.config.textScale/100) * root.fontScale : root.config.meterOnly ? (root.config.displayStyle === 2 ? 280 : 120) : (root.config.displayStyle === 2 ? 360 : 300) * Math.max(1, root.config.textScale/100) * root.fontScale
-        Layout.minimumHeight: root.config.displayStyle === 4 ? (root.config.meterOnly ? 20 : 116) * Math.max(1, root.config.textScale/100) * root.fontScale : root.config.meterOnly ? (root.config.displayStyle === 2 ? 240 : 120) : (root.config.displayStyle === 2 ? (root.config.showLocalTokens ? 810 : 540) : 440) * Math.max(1, root.config.textScale/100) * root.fontScale
+        Layout.minimumHeight: root.config.displayStyle === 4 ? (root.config.meterOnly ? 20 : (root.config.showLocalTokens ? 220 : 116)) * Math.max(1, root.config.textScale/100) * root.fontScale : root.config.meterOnly ? (root.config.displayStyle === 2 ? 240 : 120) : (root.config.displayStyle === 2 ? (root.config.showLocalTokens ? 810 : 540) : (root.config.showLocalTokens ? 550 : 440)) * Math.max(1, root.config.textScale/100) * root.fontScale
         Layout.preferredWidth: root.config.displayStyle === 4 ? 280 : 360
-        Layout.preferredHeight: root.config.displayStyle === 4 ? (root.config.meterOnly ? 20 : 116) : root.config.meterOnly ? 300 : 500
+        Layout.preferredHeight: root.config.displayStyle === 4 ? (root.config.meterOnly ? 20 : (root.config.showLocalTokens ? 220 : 116)) : root.config.meterOnly ? 300 : (root.config.showLocalTokens ? 610 : 500)
         settings: root.config
         snapshot: root.snapshot
         localTokens: root.localTokens

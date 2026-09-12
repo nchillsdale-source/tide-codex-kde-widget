@@ -9,7 +9,7 @@ ScrollView {
     ColumnLayout {
         width: page.availableWidth; spacing: 16
         Label { Layout.margins: 16; text: "Tide"; font.pointSize: 24 }
-        Label { Layout.leftMargin: 16; text: "Version 1.7.0" }
+        Label { Layout.leftMargin: 16; text: "Version 1.8.2" }
         Label { Layout.leftMargin: 16; text: "Author: Nicholas Hillsdale" }
         Label {
             Layout.fillWidth: true; Layout.margins: 16; wrapMode: Text.WordWrap

@@ -17,6 +17,7 @@ Item {
     onSnapshotChanged: historySamples = History.append(historySamples, snapshot)
     readonly property var trendSeries: History.series(historySamples, selected)
     readonly property font textFont: Typography.resolve(settings, Kirigami.Theme.defaultFont)
+    property bool advanceClock: true
     property bool busy: false
     property string failure: ""
     property bool motion: true
@@ -54,7 +55,7 @@ Item {
         var d = Math.floor(s/86400), h = Math.floor(s%86400/3600), m = Math.floor(s%3600/60);
         return "Resets in " + (d ? d+"d " : "") + (h ? h+"h " : "") + (d ? "" : m+"m");
     }
-    Timer { interval: 15000; running: true; repeat: true; onTriggered: panel.now = Date.now()/1000 }
+    Timer { interval: 15000; running: panel.advanceClock; repeat: true; onTriggered: panel.now = Date.now()/1000 }
     HoverHandler { id: hover }
     ToolTip.visible: hover.hovered && (panel.meterOnly || panel.opt("displayStyle") === 4)
     ToolTip.delay: 900
@@ -64,6 +65,8 @@ Item {
         objectName: "minimal"
         anchors.fill: parent; visible: panel.opt("displayStyle") === 4
         selected: panel.selected; textFont: panel.textFont; textScale: panel.textScale
+        localTokens: panel.localTokens; showLocalTokens: panel.opt("showLocalTokens"); now: panel.now
+        staleAfter: Math.max(420, panel.opt("refreshMinutes")*120+60)
         meterOnly: panel.meterOnly; showHeader: panel.opt("showHeader"); showStatus: panel.opt("showStatus")
         showValue: panel.opt("showPercentage"); showRemaining: panel.opt("showRemaining"); status: panel.status
         resetText: panel.opt("showResetTime") && panel.selected ? panel.countdown(panel.selected.resetsAt) : ""
@@ -154,6 +157,14 @@ Item {
                     }
                 }
             }
+        }
+        TokenUsageView {
+            objectName: "compactTokens"
+            Layout.fillWidth: true
+            visible: panel.opt("displayStyle") !== 2 && panel.shown("showLocalTokens")
+            compact: true; usage: panel.localTokens; now: panel.now
+            textFont: panel.textFont; textScale: panel.textScale
+            staleAfter: Math.max(420, panel.opt("refreshMinutes")*120+60)
         }
         RowLayout {
             visible: panel.shown("showCredits"); Layout.fillWidth: true

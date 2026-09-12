@@ -31,7 +31,7 @@ ColumnLayout {
         ComboBox {
             id: section; objectName: "helpSection"
             Layout.fillWidth: true; Accessible.name: "Help section"
-            model: ["All sections", "Getting started", "Styles", "Analytics", "Display", "Fonts", "Aquarium", "Appearance", "Updates", "About", "Troubleshooting"]
+            model: ["All sections", "Getting started", "Styles", "Analytics", "Display", "Fonts", "Aquarium", "Animation", "Updates", "About", "Troubleshooting"]
             onCurrentIndexChanged: scroll.contentItem.contentY = 0
         }
         Button { text: "Clear"; enabled: search.text.length > 0 || section.currentIndex !== 0; onClicked: { search.clear(); section.currentIndex = 0; } }
