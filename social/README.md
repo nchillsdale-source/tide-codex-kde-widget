@@ -1,11 +1,15 @@
 # Tide social showcase
 
-Latest edit: `tide-widget-configurations.mp4` contains only the five display demonstrations (30 seconds, 1080 × 1920, 60 fps), with the introductory and ending screens removed. The original export is retained below.
+Updated for Tide 1.8.2, including token readouts on every display and the reorganized settings.
 
-- `tide-showcase-vertical.mp4`: 36-second, 1080 × 1920 vertical video at 60 fps, H.264 with broadly compatible YUV 4:2:0 color. Silent, ready to add music in your social editor.
-- `tide-cover.png`: matching cover image.
+- `tide-widget-configurations.mp4`: 40 seconds, 1080 × 1920, 60 fps, H.264/YUV 4:2:0. Silent, with no title or ending screen. Two configurations per display, including transparent aquarium water, local token totals/rates, full Analytics, and Minimal meter-only mode.
+- `tide-settings-tour.gif`: looping 33-second settings tour, 1000 × 850 at 12 fps. Shows Styles and live preview, Display visibility, custom Fonts, Aquarium transparency, Animation frame pacing, Updates with local tokens, and searchable Help.
+- `tide-cover.png`: cover image from the earlier showcase.
 - `caption.txt`: suggested post caption and repository link.
+- `tide-showcase-vertical.mp4`: older 36-second export retained for reference; contains introductory and ending screens and predates token analytics.
 
-The video renders the real QML components with deterministic animation timing. It demonstrates two configurations per display using illustrative allowance values, with no account details. The geometric backdrop is a presentation background, not part of the widget. This is an offline showcase, not a desktop frame-rate benchmark.
+Video timeline: Aquarium 0–8s; Lava 8–16s; Motorsport 16–24s; Analytics 24–32s; Minimal 32–40s. Each display changes configuration halfway through its segment.
 
-Timeline: intro 0–2s; Aquarium 2–8s; Lava 8–14s; Motorsport 14–20s; Analytics 20–26s; Minimal 26–32s; GitHub and author credit 32–36s.
+The exports use current QML widget and settings components with illustrative data, not personal account readings. Animation is rendered with deterministic timing. The backdrop and settings navigation frame are presentation elements, not a screen recording of the Plasma desktop. The settings page contents are the actual widget components. This is not a hardware performance benchmark.
+
+Local token values refresh at the configured interval; they are not an instantaneous token stream. Totals cover the local Codex profile, not account-wide billing.
