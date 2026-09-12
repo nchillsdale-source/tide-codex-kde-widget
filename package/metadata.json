@@ -1,0 +1,18 @@
+{
+  "KPlugin": {
+    "Id": "local.tide.usage",
+    "Name": "Tide \u2014 Codex & Work Usage",
+    "Description": "Live Codex & Work usage with aquarium, lava, analytics and motorsport displays",
+    "Version": "1.5.1",
+    "License": "MIT",
+    "Icon": "view-statistics",
+    "Authors": [
+      {
+        "Name": "Nicholas Hillsdale"
+      }
+    ],
+    "Category": "System Information"
+  },
+  "KPackageStructure": "Plasma/Applet",
+  "X-Plasma-API-Minimum-Version": "6.0"
+}
