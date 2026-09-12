@@ -18,12 +18,49 @@ class WidgetTests(unittest.TestCase):
   view.setResizeMode(QQuickView.SizeRootObjectToView);view.resize(w,h);view.show();QTest.qWait(100)
   self.addCleanup(view.close)
   return view,view.rootObject()
+ def test_tokens_on_every_display(self):
+  view,panel=self.load('Dashboard.qml',360,810)
+  panel.setProperty('advanceClock',False);panel.setProperty('now',2000)
+  usage={'available':True,'updatedAt':2000,'today':{'total_tokens':125000,'input_tokens':100000,'cached_input_tokens':80000,'output_tokens':25000,'reasoning_output_tokens':5000},'rate':800,'rates':[100,600,300,800,1200,500,300,600,900,1000,600,800]}
+  def labels():return [x.property('text') for x in panel.findChildren(QQuickItem) if x.isVisible() and x.property('text')]
+  for style in range(5):
+   view.resize(360,240 if style==4 else 810 if style==2 else 610)
+   panel.setProperty('settings',{'displayStyle':style,'showLocalTokens':True})
+   panel.setProperty('localTokens',usage);QTest.qWait(30)
+   self.assertTrue(any('125,000 tokens today' in t for t in labels()),style)
+   self.assertTrue(any('800 tokens/min' in t for t in labels()),style)
+   self.assertEqual(any('Input ' in t for t in labels()),style==2)
+   panel.setProperty('now',3000);QTest.qWait(20)
+   self.assertTrue(any('LOCAL CODEX USAGE' in t and 'STALE' in t for t in labels()),style)
+   panel.setProperty('now',2000)
+   panel.setProperty('localTokens',{'available':False});QTest.qWait(20)
+   self.assertIn('No local token records available',labels())
+   panel.setProperty('settings',{'displayStyle':style,'showLocalTokens':False});QTest.qWait(20)
+   self.assertFalse(any('LOCAL CODEX USAGE' in t or 'token records' in t for t in labels()),style)
+   panel.setProperty('localTokens',usage)
+   panel.setProperty('settings',{'displayStyle':style,'showLocalTokens':True,'meterOnly':True});QTest.qWait(20)
+   self.assertEqual(labels(),[],style)
+ def test_live_style_preview(self):
+  view,page=self.load('configStyles.qml',640,850)
+  defaults=json.loads((UI/'Settings.js').read_text().split('var defaults = ')[1].rstrip(';\n'))
+  for key,value in defaults.items():page.setProperty('cfg_'+key,value)
+  page.findChild(QQuickItem,'previewToggle').setProperty('checked',True)
+  panel=page.findChild(QQuickItem,'stylePreview');orb=panel.findChild(QQuickItem,'aquarium')
+  page.setProperty('cfg_palette',2);page.setProperty('cfg_showGlow',False);QTest.qWait(30)
+  self.assertEqual(panel.property('accent').name(),'#c0a0ff');self.assertFalse(orb.property('showGlow'))
+  page.findChild(QQuickItem,'sampleRemaining').setProperty('value',8);QTest.qWait(30)
+  self.assertEqual(panel.property('accent').name(),'#ff7d83')
+  page.setProperty('cfg_warningColors',False);page.setProperty('cfg_fishCount',7);page.setProperty('cfg_waterOpacity',15);QTest.qWait(30)
+  self.assertEqual(panel.property('accent').name(),'#c0a0ff');self.assertEqual(orb.property('fishCount'),7)
+  self.assertAlmostEqual(orb.property('waterOpacity'),.15)
+  self.assertFalse(panel.property('advanceClock'))
+  self.assertNotIn('source: "configAbout.qml"',(ROOT/'package/contents/config/config.qml').read_text())
  def test_configuration_schema_and_pages(self):
   ns={'k':'http://www.kde.org/standards/kcfg/1.0'}
   entries=ET.parse(ROOT/'package/contents/config/main.xml').findall('.//k:entry',ns)
   defaults=json.loads((UI/'Settings.js').read_text().split('var defaults = ')[1].rstrip(';\n'))
   expected={e.attrib['name'] for e in entries};found=set()
-  for page in ['Styles','Display','Fonts','Aquarium','Appearance','Updates','Help','About']:
+  for page in ['Styles','Display','Fonts','Aquarium','Updates','Animation','Help','About']:
    view,obj=self.load('config'+page+'.qml',640,600)
    aliases=re.findall(r'property (?:alias|string|int|bool) cfg_(\w+):', (UI/('config'+page+'.qml')).read_text())
    for key in aliases:
@@ -125,7 +162,8 @@ class WidgetTests(unittest.TestCase):
   page.setProperty('cfg_useCustomFont',False)
   self.assertFalse(page.findChild(QQuickItem,'chooseFontButton').isEnabled())
  def test_frame_mode_controls(self):
-  view,page=self.load('configAquarium.qml',640,650)
+  view,page=self.load('configAnimation.qml',640,650)
+  page.setProperty('cfg_motionEnabled',True)
   spin=page.findChild(QQuickItem,'customFrameRate')
   for mode in range(4):
    page.setProperty('cfg_frameMode',mode)
