@@ -202,6 +202,10 @@ Default: Most depleted Codex & Work window. Alternatively prefer Weekly or 5-hou
 
 Default: on. Overrides aquarium and style motion switches. Turning it off freezes decorative motion but keeps usage refreshes and graph updates active. The widget’s animation button changes this same saved setting.
 
+## Styles — Minimal display
+
+A compact, professional display with a remaining percentage, thin quota bar, and reset/update times. Suggested size: 280 × 116. Keeps the transparent panel and system/custom fonts. Header, status dot, percentage, caption, reset and updated visibility switches apply. To stay compact, secondary bars, credits, action buttons and scope/error paragraphs are omitted; hover for status, reset and error details. No continuous animation is needed. Meter-only mode keeps just the bar, with a 140 × 20 minimum. Plasma may preserve the old size when switching styles; resize the desktop widget to make it small.
+
 ## About — Author, version and license
 
 About lists Nicholas Hillsdale as author, the installed Tide version, MIT license, data scope and reload instructions. Help and About do not change settings.

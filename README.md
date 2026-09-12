@@ -1,16 +1,18 @@
-# Tide 1.5.1 — Codex & Work Usage
+# Tide 1.6.0 — Codex & Work Usage
 
-An independent, community-built native Plasma 6 desktop usage meter with four selectable visual styles. It uses KDE’s system font, a transparent background, translucent water, and detailed swimming fish with shaded bodies, scales, patterned coloring, gills, eyes, flexible fins and tails. The reset countdown sits beside the update status; there is no “Weekly allowance” title.
+An independent, community-built native Plasma 6 desktop usage meter with five selectable visual styles. It uses KDE’s system font, a transparent background, translucent water, and detailed swimming fish with shaded bodies, scales, patterned coloring, gills, eyes, flexible fins and tails. The reset countdown sits beside the update status; there is no “Weekly allowance” title.
 
 ![Tide display styles using illustrative sample data](styles-preview.png)
 
-[Full settings help](HELP.md) · [Animation preview](styles-preview.mp4)
+[Full settings help](HELP.md) · [Configuration showcase video](social/tide-widget-configurations.mp4) · [Social sharing files](social/)
 
 ## Install or update
 
 Download this repository using **Code → Download ZIP**, extract it, and run `bash install.sh` from the extracted folder, or download [`tide-usage.plasmoid`](tide-usage.plasmoid?raw=true) and install it through KDE’s Add Widgets → Get New Widgets → Install Widget From Local File. Search for **Tide** to add it to your desktop. Suggested size: 360 × 500.
 
 **After updating:** Plasma can retain old QML even after removing and re-adding a widget. Press **Alt+Space**, run `plasmashell --replace`, and wait for the desktop and panels to reload. Application windows remain open. The installer does not restart Plasma automatically.
+
+Designed for Linux distributions running KDE Plasma 6; tested on CachyOS. Other distributions have not yet been verified. Plasma 5 is not supported.
 
 Requires Plasma 6, Plasma5Support’s executable data engine, Kirigami, Python 3, and a signed-in Codex CLI. The bundled Codex binary at `/usr/lib/chatgpt/resources/codex` is supported as a fallback. The package includes no sign-in credentials or account data.
 
@@ -23,6 +25,7 @@ Right-click Tide → **Configure Tide / Tide Settings**. Settings are stored per
 - **Aquarium:** translucent water, detailed fish, bubbles and a glowing quota ring. Remaining allowance determines the water level.
 - **Lava chamber:** a metal-and-glass reservoir with molten fill, rising heat pockets, drifting crust, glowing seams and embers. Remaining allowance determines the lava level.
 - **Analytics:** a clean session trend with a fixed 0–100% axis and labeled allowance bars. History uses successful readings recorded while the widget is running (up to 480 snapshots). The chart shows individual points until eight readings are collected, then connects them. Gaps remain unconnected; quota resets start a new series. Reloading the widget clears history. Suggested size: 360 × 540.
+- **Minimal:** a compact 280 × 116 display with a percentage, slim allowance bar and reset/update times. Transparent by default, with system or custom fonts. No decorative motion, secondary bars, credits or buttons; hover for status and connection details. Meter-only mode shows just the bar (minimum 140 × 20). Resize an existing desktop instance after switching if Plasma preserves its old size.
 - **Motorsport:** an original open-wheel race car follows a flowing circuit with curbs and a checkered start line. An independent inner fuel-style gauge represents remaining allowance. The car is decorative; its lap position does not represent usage.
 - The Styles page includes a live sample preview, independent motion toggle, speed (20–200%), surface opacity (20–100%), detail toggle and five race-car colors.
 - All styles use the same account data, custom-font settings, meter-only layout and frame pacing modes. The master animation toggle pauses all styles. Aquarium-specific controls affect only the aquarium; the new styles have their own motion settings. Styling controls apply to the features present in each display.
