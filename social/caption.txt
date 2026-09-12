@@ -1,0 +1,10 @@
+Meet Tide — a customizable Codex & Work usage widget for KDE Plasma 6.
+
+Aquarium, lava, motorsport, analytics, or a clean minimal display. Make it yours with transparent surfaces, custom fonts, and meter-only layouts.
+
+Free and open source, created by Nicholas Hillsdale.
+https://github.com/nchillsdale-source/tide-codex-kde-widget
+
+Demo uses illustrative data. Shared Codex & Work allowance; ordinary ChatGPT conversations are excluded.
+
+#KDE #Plasma #Linux #CachyOS #OpenSource #DesktopCustomization
