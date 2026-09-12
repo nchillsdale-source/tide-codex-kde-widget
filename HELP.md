@@ -12,11 +12,11 @@ All percentages mean allowance remaining, not allowance used. Tide reads the sha
 
 ## Styles — Display style
 
-Default: Aquarium. Aquarium uses the water level to show remaining allowance. Lava chamber uses the molten fill level. Analytics uses a session graph and quota bars. Motorsport uses the inner fuel-style gauge; the car’s position is decorative and does not measure usage. Switching styles preserves the other settings. The settings preview uses illustrative sample data.
+Default: Aquarium. Aquarium uses the water level to show remaining allowance. Lava chamber uses the molten fill level. Analytics uses a session graph and quota bars. Motorsport uses the inner fuel-style gauge; the car’s position is decorative and does not measure usage. Switching styles preserves the other settings. The settings preview uses the actual widget with illustrative sample data. Styles edits update immediately; apply edits on other pages, then return to Styles. Adjust Sample allowance remaining to preview warning colors. Preview buttons do not perform account actions. Enable Show live preview to expand the sample; it is collapsed by default to keep the page compact.
 
 ## Styles — Animate this style
 
-Default: on. Enables lava motion or the moving race car. Available only for Lava chamber and Motorsport. The master animation switch in Updates must also be on. Aquarium has separate water and fish controls. Analytics redraws when data changes and does not need continuous animation.
+Default: on. Enables lava motion or the moving race car. Available only for Lava chamber and Motorsport. The master animation switch on Animation must also be on. Aquarium has separate water and fish controls. Analytics redraws when data changes and does not need continuous animation.
 
 ## Styles — Animation speed (%)
 
@@ -24,7 +24,7 @@ Default: on. Enables lava motion or the moving race car. Available only for Lava
 
 ## Styles — Surface opacity (%)
 
-20–100%; default 85%. Controls the styled surfaces in Lava chamber and Motorsport. Lower values reveal more of the wallpaper. For aquarium water, use Appearance → Water opacity; for the entire panel background, use Background panel opacity.
+20–100%; default 85%. Controls the styled surfaces in Lava chamber and Motorsport. Lower values reveal more of the wallpaper. For aquarium water, use Aquarium → Water opacity; for the entire panel background, use Background panel opacity.
 
 ## Styles — Show texture and small details
 
@@ -132,7 +132,7 @@ Default: Koi — pearl, gold and orange. Tropical uses turquoise and blue; Silve
 
 ## Aquarium — Animate swimming and fins
 
-Default: on. Animates fish movement and fins. Turn off to keep fish still while allowing water motion to continue. The Updates master animation switch overrides this option.
+Default: on. Animates fish movement and fins. Turn off to keep fish still while allowing water motion to continue. The Animation master switch overrides this option.
 
 ## Aquarium — Animate water
 
@@ -146,53 +146,53 @@ Default: on. Shows decorative bubbles in Aquarium. Their motion follows water an
 
 0–180%; default 100%. Adjusts surface wave amplitude. Zero flattens the surface; it does not disable fish motion or data updates.
 
-## Aquarium — Animation mode
+## Animation — Animation mode
 
-Default: Balanced, capped at 30 fps. Smooth caps drawing at 60 fps. Match display draws on every frame provided by Qt’s animation clock, with no extra cap. Custom enables a chosen limit. This setting also controls Lava chamber and Motorsport even though it is on the Aquarium page. Actual frame rate depends on the display, compositor and system load. Higher rates can look smoother but use more resources. Analytics only repaints when needed.
+Default: Balanced, capped at 30 fps. Smooth caps drawing at 60 fps. Match display draws on every frame provided by Qt’s animation clock, with no extra cap. Custom enables a chosen limit. This setting also controls Lava chamber and Motorsport and is now grouped on the Animation page. Actual frame rate depends on the display, compositor and system load. Higher rates can look smoother but use more resources. Analytics only repaints when needed.
 
-## Aquarium — Custom frame limit (fps)
+## Animation — Custom frame limit (fps)
 
 10–240 fps; default 30. Editable only in Custom animation mode. This is a drawing cap, not a guaranteed frame rate or monitor setting. Use Balanced for lighter resource use, Smooth for more fluid motion, or Match display to follow Qt’s display-driven timing.
 
-## Appearance — Water palette
+## Styles — Accent palette
 
 Default: Lagoon cyan. Other choices are Ocean blue, Aurora violet, Sunset coral and KDE highlight color. Sets the aquarium water/accent palette and shared decorative accents where used. Lava retains its molten colors, the car uses its own color, and Analytics uses a restrained blue graph palette.
 
-## Appearance — Change color when remaining allowance is low
+## Styles — Change color when remaining allowance is low
 
 Default: on. Shared accents change to amber at 25% or less remaining and coral at 10% or less. It does not recolor every styled surface or the Analytics graph.
 
-## Appearance — Show the outer progress ring
+## Aquarium — Show the outer progress ring
 
 Default: on. Shows the aquarium quota ring. Lava chamber, Motorsport and Analytics keep their own gauge or chart elements independently.
 
-## Appearance — Show scale markings
+## Styles — Show scale markings
 
 Default: on. Shows decorative tick marks where present, such as around Aquarium. The removed outer lava dashes do not return when this is enabled. Analytics keeps its chart scale independently.
 
-## Appearance — Show glow around the meter
+## Styles — Show glow around the meter
 
 Default: on. Enables glow effects in the decorative displays where supported. Analytics stays flat and does not use a glow.
 
-## Appearance — Glow intensity (%)
+## Aquarium — Glow intensity (%)
 
-0–100%; default 60%. Adjusts the aquarium’s outer glow when Show glow is enabled. It does not change the lava’s inherent molten shading or the Analytics graph.
+0–100%; default 60%. Adjusts the aquarium’s outer glow when Show glow is enabled. It does not change the lava’s inherent molten shading or the Analytics graph. Enable the shared glow switch on Styles to see this effect.
 
-## Appearance — Water opacity (%)
+## Aquarium — Water opacity (%)
 
 0–100%; default 35%. Controls aquarium water transparency. Zero hides the water tint while retaining enabled fish and other decorations. Lower values reveal more of the wallpaper.
 
-## Appearance — Glass shading (%)
+## Aquarium — Glass shading (%)
 
 0–100%; default 0%. Darkens the aquarium interior to create a glass effect and improve contrast. Zero leaves the interior shading transparent.
 
-## Appearance — Background panel opacity (%)
+## Display — Background panel opacity (%)
 
 0–100%; default 0%. Sets the dark panel behind the entire widget in every style. Zero is transparent; increase it when text is hard to read over wallpaper. It is separate from water and style surface opacity.
 
-## Updates — Show local token usage in Analytics
+## Updates — Show local token usage on all displays
 
-Default: on. Reads token-counter metadata from local Codex session and archived-session logs on each refresh. Shows today’s total, input, cached input, output and reasoning counts. Cached input is included in input; reasoning is included in output. They are not added twice. The rate is recorded total tokens during the last five minutes divided by five; twelve five-minute bars cover the last hour and use a zero baseline with an automatically scaled top value. Counts belong to all accounts and models in this local Codex profile, not account-wide Work activity or billing. Logs may omit remote activity or earlier history. Partial means a malformed record, missing baseline or scan limit prevented a full result. No conversation text or session paths are included in the results, and no new token-history files are created. Turn off to hide the section and stop scans on subsequent refreshes. Meter-only mode hides it. Suggested Analytics height with tokens: 810 pixels.
+Default: on. Every display can show local tokens: Aquarium, Lava, Motorsport and Minimal have a compact total and rate readout; Analytics retains its detailed breakdown and graph. The rate is refreshed at the configured interval, not streamed per token. Reads token-counter metadata from local Codex session and archived-session logs on each refresh. Shows today’s total, input, cached input, output and reasoning counts. Cached input is included in input; reasoning is included in output. They are not added twice. The rate is recorded total tokens during the last five minutes divided by five; twelve five-minute bars cover the last hour and use a zero baseline with an automatically scaled top value. Counts belong to all accounts and models in this local Codex profile, not account-wide Work activity or billing. Logs may omit remote activity or earlier history. Partial means a malformed record, missing baseline or scan limit prevented a full result. No conversation text or session paths are included in the results, and no new token-history files are created. Turn off to hide the section and stop scans on subsequent refreshes. Meter-only mode hides it. Suggested Analytics height with tokens: 810 pixels.
 
 ## Updates — Refresh interval (minutes)
 
@@ -202,7 +202,7 @@ Default: on. Reads token-counter metadata from local Codex session and archived-
 
 Default: Most depleted Codex & Work window. Alternatively prefer Weekly or 5-hour. This selection drives the main percentage, decorative fill or gauge, reset countdown and Analytics trend. If the preferred window is absent, Tide uses an available shared allowance, then another reported bucket. Other available windows remain in the bars.
 
-## Updates — Enable animation (master switch)
+## Animation — Enable animation (master switch)
 
 Default: on. Overrides aquarium and style motion switches. Turning it off freezes decorative motion but keeps usage refreshes and graph updates active. The widget’s animation button changes this same saved setting.
 
@@ -212,7 +212,7 @@ A compact, professional display with a remaining percentage, thin quota bar, and
 
 ## About — Author, version and license
 
-About lists Nicholas Hillsdale as author, the installed Tide version, MIT license, data scope and reload instructions. Help and About do not change settings.
+Plasma’s built-in About section lists Nicholas Hillsdale as author, the installed Tide version and MIT license. Help and About do not change settings.
 
 ## Troubleshooting — LIVE, SYNCING, STALE and OFFLINE
 

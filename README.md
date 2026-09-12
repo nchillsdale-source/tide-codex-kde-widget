@@ -1,10 +1,31 @@
 # Tide — Codex & Work Usage for KDE
 
-**Version 1.7.0 · KDE Plasma 6 · MIT license**
+**Version 1.8.2 · KDE Plasma 6 · MIT license**
 
-Keep your remaining allowance on your desktop, in a style that fits your setup. Tide offers five displays, transparent surfaces, system or custom fonts, and a searchable settings guide. Analytics also shows token totals and usage rates from your local Codex logs.
+Keep your remaining allowance on your desktop, in a style that fits your setup. Tide offers five displays, transparent surfaces, system or custom fonts, and a searchable settings guide. Every display can show token totals and usage rates from your local Codex logs; Analytics adds a detailed breakdown and graph.
 
-**[Download the widget](tide-usage.plasmoid?raw=true)** · [Watch the 30-second configuration showcase](social/tide-widget-configurations.mp4) · [Settings help](HELP.md)
+**[Download the widget](tide-usage.plasmoid?raw=true)** · [Watch the 40-second configuration showcase](social/tide-widget-configurations.mp4) · [Settings help](HELP.md)
+
+## What’s new in 1.8.2
+
+- Local token totals and rates on all five displays, with a full breakdown and graph in Analytics.
+- Organized settings: aquarium-specific controls under Aquarium, shared effects under Styles, and a dedicated Animation page.
+- Working live style preview, adjustable sample allowance, and a single built-in About section.
+- Refreshed video and settings tour, plus versioned installable release packages.
+
+## Video preview
+
+https://github.com/user-attachments/assets/9f5c7fd4-78fc-4821-8c25-1eb3a32a7198
+
+Forty seconds of the current widget, two configurations per display, with sample data and no title or ending screen. [Download the MP4](social/tide-widget-configurations.mp4).
+
+## Settings tour
+
+![Tide settings: live preview, display controls, fonts, aquarium, animation, updates and help](social/tide-settings-tour.gif)
+
+The tour uses the real settings components in a presentation frame with sample data.
+
+## Display gallery
 
 ![Aquarium, Lava chamber, Analytics and Motorsport with illustrative data](styles-preview.png)
 
@@ -68,11 +89,11 @@ Right-click Tide → **Configure Tide / Tide Settings → Styles**.
 
 | Display | Appearance | Suggested size |
 | --- | --- | --- |
-| Aquarium | Translucent water, detailed swimming fish, bubbles and a quota ring | 360 × 500 |
-| Lava chamber | Molten fill, drifting crust, heat pockets and embers | 360 × 500 |
-| Motorsport | An open-wheel car on a circuit, with an inner allowance gauge | 360 × 500 |
+| Aquarium | Translucent water, detailed swimming fish, bubbles and a quota ring | 360 × 610 with tokens; 360 × 500 without |
+| Lava chamber | Molten fill, drifting crust, heat pockets and embers | 360 × 610 with tokens; 360 × 500 without |
+| Motorsport | An open-wheel car on a circuit, with an inner allowance gauge | 360 × 610 with tokens; 360 × 500 without |
 | Analytics | Allowance history, quota bars, local token totals and rates | 360 × 810 with tokens; 360 × 540 without |
-| Minimal | Percentage, slim quota bar, reset and update times | 280 × 116 |
+| Minimal | Percentage, slim quota bar, reset and update times | 280 × 220 with tokens; 280 × 116 without |
 
 Aquarium and Lava fill levels represent remaining allowance. Motorsport’s inner gauge represents allowance; the car’s lap position is decorative. Minimal omits secondary bars, credits and action buttons to stay compact; hover for status and error details.
 
@@ -83,13 +104,13 @@ Aquarium and Lava fill levels represent remaining allowance. Motorsport’s inne
 - **Display:** meter-only mode, individual text visibility, and text scaling from 70–160%.
 - **Fonts:** follow KDE’s system font or choose a custom family, style and base size.
 - **Aquarium:** fish count, size, speed and colors; independent fish/water animation, bubbles and waves.
-- **Appearance:** palette, low-allowance colors, ring, ticks, glow, water transparency, glass shading and panel opacity.
+- **Aquarium appearance:** water transparency, glass shading, the aquarium ring and glow intensity are grouped on Aquarium. Shared colors, glow and markings are on Styles; panel opacity is on Display.
 - **Styles:** motion, speed, surface opacity and detail for Lava and Motorsport, plus car colors.
-- **Updates:** refresh every 1–30 minutes (default three), main allowance selection, master animation switch and local token analytics toggle.
+- **Updates:** refresh every 1–30 minutes (default three), main allowance selection and local token analytics toggle.
 
-The Aquarium page also contains animation pacing for decorative displays: **Balanced** (up to 30 fps, default), **Smooth** (up to 60 fps), **Match display**, or **Custom** (10–240 fps). Actual cadence depends on Qt, the compositor and system load. Motion speed remains time-based; a higher frame cap does not speed up the animation. Analytics and Minimal do not need continuous decorative animation.
+The dedicated **Animation** page contains the master motion switch and frame pacing for decorative displays: **Balanced** (up to 30 fps, default), **Smooth** (up to 60 fps), **Match display**, or **Custom** (10–240 fps). Actual cadence depends on Qt, the compositor and system load. Motion speed remains time-based; a higher frame cap does not speed up the animation. Analytics and Minimal do not need continuous decorative animation.
 
-Settings are saved per widget instance. Controls affect only displays that use those features. The **Help** tab explains all 49 settings, defaults, ranges and troubleshooting, works offline, and supports search and section filters. Read the same guide in [HELP.md](HELP.md).
+Settings are organized into labeled groups. Display visibility uses two columns when space allows, and style previews can be expanded on demand. The preview uses the actual widget and follows current Styles edits; apply changes on other pages and return to Styles to see them. Sample allowance can be adjusted to inspect warning colors. Meter-only mode disables overridden text controls while preserving their values. Settings are saved per widget instance. Controls affect only displays that use those features. The **Help** tab explains all 49 settings, defaults, ranges and troubleshooting, works offline, and supports search and section filters. Read the same guide in [HELP.md](HELP.md).
 
 ## Analytics: two kinds of history
 
@@ -99,7 +120,9 @@ Tide keeps up to 480 successful snapshots in memory while the widget runs. The g
 
 ### Local token history
 
-Enabled by default under **Updates → Show local token usage in Analytics**. Tide reads token-counter metadata from `sessions/` and `archived_sessions/` under `CODEX_HOME` (default `~/.codex`).
+Local token usage is available on every display. Enable **Updates → Show local token usage on all displays** for today’s local token total and the last five-minute average rate. Analytics also shows the full breakdown and hourly graph. The readout follows the configured refresh interval and is hidden in meter-only mode. It measures this local Codex profile across accounts, not account-wide billing usage.
+
+Enabled by default under **Updates → Show local token usage on all displays**. Tide reads token-counter metadata from `sessions/` and `archived_sessions/` under `CODEX_HOME` (default `~/.codex`).
 
 “Today” starts at local midnight. The tokens/minute figure is the recorded total during the trailing five minutes divided by five, not instantaneous generation speed. Twelve five-minute bars cover the last hour, with a zero baseline and an automatically scaled maximum. Values refresh at the configured usage interval.
 
@@ -120,10 +143,12 @@ The package includes no credentials or account data. Local token results contain
 | Empty allowance graph | Allow successful readings to accumulate; a newly opened widget has no prior allowance history. |
 | No local token records | Check whether this Codex profile has session logs containing token counters. Remote activity may not be recorded here. |
 | PARTIAL token results | Some records or initial history could not be fully processed. Treat the displayed totals as incomplete. |
-| Text blends into wallpaper | Increase **Appearance → Background panel opacity**. |
+| Text blends into wallpaper | Increase **Display → Background panel opacity**. |
 | Old widget after an update | Reload Plasma with `plasmashell --replace`. |
 
 ## Development
+
+Every published update includes a new version, release and packages. See [RELEASING.md](RELEASING.md). Run `python3 release.py` to build the versioned installer, portable source ZIP and SHA-256 checksums.
 
 Build the installable package without connecting an account:
 
@@ -140,7 +165,7 @@ python3 tests/test_frame_clock.py
 python3 tests/test_qml.py
 ```
 
-The Qt-based tests require PySide6 and KDE QML modules. The 22 tests cover allowance parsing, token deduplication, resets, midnight boundaries, rate calculations, partial scans, frame pacing, settings bindings and widget rendering. QML linting:
+The Qt-based tests require PySide6 and KDE QML modules. The 24 tests cover allowance parsing, token deduplication, resets, midnight boundaries, rate calculations, partial scans, frame pacing, settings bindings and widget rendering. QML linting:
 
 ```bash
 qmllint package/contents/ui/*.qml package/contents/config/config.qml
@@ -148,11 +173,11 @@ qmllint package/contents/ui/*.qml package/contents/config/config.qml
 
 ## Preview and sharing files
 
-- [30-second configuration video](social/tide-widget-configurations.mp4): all five displays, two configurations each, without title or ending screens; vertical 1080p at 60 fps.
+- [40-second configuration video](social/tide-widget-configurations.mp4): all five displays, two configurations each, without title or ending screens; vertical 1080p at 60 fps.
 - [Cover image](social/tide-cover.png) and [suggested caption](social/caption.txt).
 - [Sharing folder](social/), including the original longer video.
 
-Previews use actual QML renderers and illustrative data, not live account readings. They demonstrate appearance, not hardware performance. The videos predate local token analytics and do not show that section.
+Previews use actual QML renderers and illustrative data, not live account readings. They demonstrate appearance, not hardware performance. The updated configuration video includes local token analytics on every display. A separate [settings GIF](social/tide-settings-tour.gif) tours the current controls and live preview. The older introductory video is retained for reference.
 
 ## Remove
 
