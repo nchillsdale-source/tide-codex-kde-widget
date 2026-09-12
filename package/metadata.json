@@ -2,8 +2,8 @@
   "KPlugin": {
     "Id": "local.tide.usage",
     "Name": "Tide \u2014 Codex & Work Usage",
-    "Description": "Live Codex & Work usage with aquarium, lava, analytics and motorsport displays",
-    "Version": "1.5.1",
+    "Description": "Live Codex & Work usage with aquarium, lava, analytics, motorsport and minimal displays",
+    "Version": "1.6.0",
     "License": "MIT",
     "Icon": "view-statistics",
     "Authors": [
