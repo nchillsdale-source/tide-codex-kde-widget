@@ -1,117 +1,165 @@
-# Tide 1.7.0 — Codex & Work Usage
+# Tide — Codex & Work Usage for KDE
 
-An independent, community-built native Plasma 6 desktop usage meter with five selectable visual styles. It uses KDE’s system font, a transparent background, translucent water, and detailed swimming fish with shaded bodies, scales, patterned coloring, gills, eyes, flexible fins and tails. The reset countdown sits beside the update status; there is no “Weekly allowance” title.
+**Version 1.7.0 · KDE Plasma 6 · MIT license**
 
-![Tide display styles using illustrative sample data](styles-preview.png)
+Keep your remaining allowance on your desktop, in a style that fits your setup. Tide offers five displays, transparent surfaces, system or custom fonts, and a searchable settings guide. Analytics also shows token totals and usage rates from your local Codex logs.
 
-[Full settings help](HELP.md) · [Configuration showcase video](social/tide-widget-configurations.mp4) · [Social sharing files](social/)
+**[Download the widget](tide-usage.plasmoid?raw=true)** · [Watch the 30-second configuration showcase](social/tide-widget-configurations.mp4) · [Settings help](HELP.md)
 
-## Install or update
+![Aquarium, Lava chamber, Analytics and Motorsport with illustrative data](styles-preview.png)
 
-Download this repository using **Code → Download ZIP**, extract it, and run `bash install.sh` from the extracted folder, or download [`tide-usage.plasmoid`](tide-usage.plasmoid?raw=true) and install it through KDE’s Add Widgets → Get New Widgets → Install Widget From Local File. Search for **Tide** to add it to your desktop. Suggested size: 360 × 500.
+*Four of the five displays, rendered from the widget with sample data. Minimal is shown below.*
 
-**After updating:** Plasma can retain old QML even after removing and re-adding a widget. Press **Alt+Space**, run `plasmashell --replace`, and wait for the desktop and panels to reload. Application windows remain open. The installer does not restart Plasma automatically.
+![Minimal display with illustrative data](minimal-preview.png)
 
-Designed for Linux distributions running KDE Plasma 6; tested on CachyOS. Other distributions have not yet been verified. Plasma 5 is not supported.
+## What Tide measures
 
-Requires Plasma 6, Plasma5Support’s executable data engine, Kirigami, Python 3, and a signed-in Codex CLI. The bundled Codex binary at `/usr/lib/chatgpt/resources/codex` is supported as a fallback. The package includes no sign-in credentials or account data.
+| Data | What you see | Scope |
+| --- | --- | --- |
+| Shared allowance | Percentage remaining, quota windows and reset times | Reported Codex & Work account limits, including Workspace Agents and ChatGPT for Excel |
+| Local tokens | Today’s total, input, cached input, output and reasoning counts | Codex logs stored in this computer’s local profile, across recorded accounts and models |
+| Local token rate | Trailing five-minute average and a one-hour bar chart | Recorded token events, grouped into five-minute bins |
 
-## Settings
+**Ordinary ChatGPT conversations are not included.** Local token counts are not account-wide billing totals and cannot be converted into allowance percentages. Cached tokens are already included in input; reasoning tokens are already included in output.
 
-Right-click Tide → **Configure Tide / Tide Settings**. Settings are stored per widget by KDE and applied with the configuration dialog’s Apply or OK buttons. Editable settings pages have a restore-defaults button. The **Help** tab provides a searchable offline guide covering every option, defaults, ranges, Analytics history and troubleshooting. The same guide is included in `HELP.md`.
+## Requirements
 
-### Styles
+- Linux running **KDE Plasma 6**. Plasma 5 is not supported.
+- **Kirigami** and **Plasma5Support**, including its executable data engine.
+- **Python 3**.
+- A **Codex CLI installation signed in to your own account**, with allowance information available.
+- Internet access for account-limit refreshes. Local token scans use files already on disk.
 
-- **Aquarium:** translucent water, detailed fish, bubbles and a glowing quota ring. Remaining allowance determines the water level.
-- **Lava chamber:** a metal-and-glass reservoir with molten fill, rising heat pockets, drifting crust, glowing seams and embers. Remaining allowance determines the lava level.
-- **Analytics:** a clean session trend with a fixed 0–100% axis and labeled allowance bars. History uses successful readings recorded while the widget is running (up to 480 snapshots). The chart shows individual points until eight readings are collected, then connects them. Gaps remain unconnected; quota resets start a new series. Reloading the widget clears history. Suggested size: 360 × 540.
-- **Minimal:** a compact 280 × 116 display with a percentage, slim allowance bar and reset/update times. Transparent by default, with system or custom fonts. No decorative motion, secondary bars, credits or buttons; hover for status and connection details. Meter-only mode shows just the bar (minimum 140 × 20). Resize an existing desktop instance after switching if Plasma preserves its old size.
-- **Motorsport:** an original open-wheel race car follows a flowing circuit with curbs and a checkered start line. An independent inner fuel-style gauge represents remaining allowance. The car is decorative; its lap position does not represent usage.
-- The Styles page includes a live sample preview, independent motion toggle, speed (20–200%), surface opacity (20–100%), detail toggle and five race-car colors.
-- All styles use the same account data, custom-font settings, meter-only layout and frame pacing modes. The master animation toggle pauses all styles. Aquarium-specific controls affect only the aquarium; the new styles have their own motion settings. Styling controls apply to the features present in each display.
-- The existing aquarium remains the default; switching styles preserves other settings.
+Tide looks for `codex` on the desktop session’s `PATH`, then falls back to `/usr/lib/chatgpt/resources/codex`. No separate API key is required by the widget.
 
-### Display
+Tested on **CachyOS with KDE**. Other Plasma 6 distributions are intended to work with these dependencies, but have not yet been verified. Dependency package names and Codex installation paths vary by distribution. PySide6 and FFmpeg are development/preview tools, not runtime requirements.
 
-- **Meter only:** shows the selected meter alone, without any text or buttons. Right-click to configure it; hover for usage, reset and connection information. It can resize down to 120 × 120 (Analytics: 280 × 240).
-- Individually show or hide the title, connection status, percentage, Remaining caption, additional allowances, credits, reset countdown, update time, action buttons, scope note and error message.
-- Adjust text size from 70–160% while retaining KDE’s chosen font. Widget minimum dimensions adapt to larger text.
+## Install
 
-### Fonts
+### From the widget package
 
-- Keep KDE’s system font (default), or enable a custom font for this widget only.
-- Use **Choose font…** to select an installed family and style, including bold or italic styles.
-- Adjust the base size from 6–48 pt and inspect the live preview. Display text scaling applies on top of this size.
-- **Restore KDE font defaults** returns to the system font. Larger custom fonts increase the widget’s minimum dimensions to preserve the layout.
-- Font selections use the settings dialog’s Apply/OK workflow; canceling the font picker does not apply a selection.
+1. Download [`tide-usage.plasmoid`](tide-usage.plasmoid?raw=true).
+2. Open KDE’s **Add Widgets → Get New Widgets → Install Widget From Local File** and select it.
+3. Search for **Tide** in Add Widgets and place it on your desktop.
 
-### Aquarium
+### From the source repository
 
-- Enable or hide fish; choose 1–10 fish.
-- Adjust fish size (50–200%) and swimming speed (20–200%).
-- Choose koi, tropical or silver colors.
-- Animate fish and water independently.
-- Enable bubbles and adjust wave height.
-- **Balanced (default):** display-synced drawing capped at 30 fps.
-- **Smooth:** display-synced drawing capped at 60 fps.
-- **Match display:** draws on each frame supplied by Qt’s animation clock, without an additional cap. Actual cadence depends on the display, compositor and system load.
-- **Custom:** choose a drawing cap from 10–240 fps. The custom limit control is enabled only in Custom mode.
-- All modes use real elapsed time, so swimming speed stays consistent. Capped modes skip painting on intervening display frames. Pausing resets the timing budget to avoid catch-up jumps. Existing custom numeric values are retained, while the newly added mode defaults to Balanced.
-- Fish stay inside the sphere below the waves, shrink in shallow water, and disappear when there is insufficient room. Their silhouettes narrow naturally during turns.
+Choose **Code → Download ZIP**, extract it, and run this inside the extracted folder:
 
-### Appearance
+```bash
+bash install.sh
+```
 
-- Choose lagoon, ocean, aurora, sunset or KDE highlight colors.
-- Optionally switch to amber at 25% remaining and coral at 10%.
-- Show or hide the progress ring, scale markings and glow; adjust glow intensity.
-- **Water opacity:** default 35%, letting your wallpaper show through. Set 0% to hide the water tint while retaining the fish.
-- **Glass shading:** default 0%; increase for a darker glass interior.
-- **Background panel opacity:** default 0% for a transparent desktop widget.
+The installer copies the widget to `${XDG_DATA_HOME:-$HOME/.local/share}/plasma/plasmoids/local.tide.usage`. It does not install a background service or restart Plasma.
 
-### Local token analytics
+### Updating an existing installation
 
-Analytics can show today’s local input, cached-input, output, reasoning and total tokens, a trailing five-minute tokens/minute average, and twelve five-minute rate bars for the last hour. Enable or disable it under Updates → Show local token usage in Analytics. Suggested Analytics size with this section: 360 × 810. Meter-only mode hides token details.
+Install the newer package or run the installer again. If the old version remains visible, press **Alt+Space** and run:
 
-These are counters from `CODEX_HOME/sessions` and `archived_sessions` (default `~/.codex`), across accounts/models recorded in that local profile. They are not account-wide usage, billing totals or a conversion of allowance percentages. Cached input is already included in input; reasoning is already included in output. Today uses local midnight; rates use event timestamps, not instantaneous generation speed. Duplicate cumulative reports and copied timestamp/counter records are deduplicated. Missing initial history, malformed records or scan limits produce a Partial label. Scans are bounded to 256 MiB / five seconds of reading and do not return conversation text or paths or save new token-history files. Local results can refresh even if the allowance read fails. This log format may change with Codex versions.
+```bash
+plasmashell --replace
+```
 
-### Updates
+Your desktop and panels briefly reload; application windows remain open. This clears the in-memory allowance trend. Ordinary settings changes only need **Apply** or **OK**.
 
-- Refresh every 1–30 minutes; default three minutes. The refresh button updates immediately.
-- Select the most depleted, weekly or 5-hour Codex & Work window for the main meter. If the requested window is unavailable, Tide falls back to the available shared allowance, then another reported bucket.
-- Master animation switch. The widget’s animation button saves this setting too.
+## Choose your display
 
-### About
+Right-click Tide → **Configure Tide / Tide Settings → Styles**.
 
-The About tab lists **Nicholas Hillsdale** as author, the widget version, license, usage scope and update instructions. The package metadata also credits Nicholas Hillsdale.
+| Display | Appearance | Suggested size |
+| --- | --- | --- |
+| Aquarium | Translucent water, detailed swimming fish, bubbles and a quota ring | 360 × 500 |
+| Lava chamber | Molten fill, drifting crust, heat pockets and embers | 360 × 500 |
+| Motorsport | An open-wheel car on a circuit, with an inner allowance gauge | 360 × 500 |
+| Analytics | Allowance history, quota bars, local token totals and rates | 360 × 810 with tokens; 360 × 540 without |
+| Minimal | Percentage, slim quota bar, reset and update times | 280 × 116 |
 
-## Data and limitations
+Aquarium and Lava fill levels represent remaining allowance. Motorsport’s inner gauge represents allowance; the car’s lap position is decorative. Minimal omits secondary bars, credits and action buttons to stay compact; hover for status and error details.
 
-Reads `account/rateLimits/read` through the documented local `codex app-server --stdio` interface. The reader has a 35-second deadline and shuts down its app-server after each read. It uses your existing Codex sign-in and may cause Codex to maintain its normal state files and refresh authentication.
+**Meter-only mode** hides text and controls. Minimum sizes are 120 × 120 for decorative meters, 280 × 240 for Analytics, and 140 × 20 for Minimal. Larger fonts require more room. Plasma may preserve the old size when switching styles; resize the desktop widget as needed.
 
-No model turns, purchases, reset redemptions or usage-history files are created by Tide. Missing values are shown as unavailable. Failed updates retain the previous data and mark it stale. Staleness also detects overdue updates, with a threshold adjusted to the selected refresh interval. In meter-only mode, hover to see connection problems.
+## Customize it
 
-The shared allowance covers Codex, Work, Workspace Agents, and ChatGPT for Excel. **Ordinary ChatGPT conversations are not included.** Other reported allowances, such as Spark, appear in the additional bars. Hover an additional bar for its reset time.
+- **Display:** meter-only mode, individual text visibility, and text scaling from 70–160%.
+- **Fonts:** follow KDE’s system font or choose a custom family, style and base size.
+- **Aquarium:** fish count, size, speed and colors; independent fish/water animation, bubbles and waves.
+- **Appearance:** palette, low-allowance colors, ring, ticks, glow, water transparency, glass shading and panel opacity.
+- **Styles:** motion, speed, surface opacity and detail for Lava and Motorsport, plus car colors.
+- **Updates:** refresh every 1–30 minutes (default three), main allowance selection, master animation switch and local token analytics toggle.
 
-The scope note can be hidden, but the data scope does not change. The open-arrow button opens the account’s Usage page in your regular browser.
+The Aquarium page also contains animation pacing for decorative displays: **Balanced** (up to 30 fps, default), **Smooth** (up to 60 fps), **Match display**, or **Custom** (10–240 fps). Actual cadence depends on Qt, the compositor and system load. Motion speed remains time-based; a higher frame cap does not speed up the animation. Analytics and Minimal do not need continuous decorative animation.
 
-## Validation
+Settings are saved per widget instance. Controls affect only displays that use those features. The **Help** tab explains all 49 settings, defaults, ranges and troubleshooting, works offline, and supports search and section filters. Read the same guide in [HELP.md](HELP.md).
 
-`python3 tests/test_local_tokens.py` checks token deduplication, resets, midnight boundaries, rates and partial scans. `python3 tests/test_usage.py` checks quota parsing, unknown values, legacy data and window ordering. `python3 tests/test_frame_clock.py` tests pacing at display rates from 30–240 Hz, including 59.94 Hz, stable motion speed and stall handling. `python3 tests/test_qml.py` additionally requires PySide6 and KDE QML modules; it checks all settings-page bindings against the schema, window selection, meter-only visibility, independent animation, frame-mode controls, custom-font selection and fallback, style switching and motion, session history, reset boundaries, empty states, and actual water translucency. QML checks: `qmllint package/contents/ui/*.qml package/contents/config/config.qml`.
+## Analytics: two kinds of history
 
-`preview.png` renders the actual QML over an illustrative background with sample 72% remaining allowance. It compares the standard and meter-only views; it is not a live desktop screenshot.
+### Allowance history
 
-`styles-preview.png` and `styles-preview.mp4` show all four actual QML renderers with a sample 72% allowance. The trend uses explicitly illustrative sample readings. The video is a 30 fps offscreen preview, not a hardware performance benchmark. `analytics-preview.png` compares a populated session with a newly started session.
+Tide keeps up to 480 successful snapshots in memory while the widget runs. The graph starts with individual points and connects them after eight readings—about 21 minutes after the first reading at the default interval. Long gaps remain unconnected, and quota resets start a separate series. Reloading the widget clears this history; earlier account activity is not downloaded.
 
-## Building the installable package
+### Local token history
 
-Run `python3 build.py` from the repository folder. It packages the `package/` source directory into `tide-usage.plasmoid`, excluding Python caches. No account connection is needed to build.
+Enabled by default under **Updates → Show local token usage in Analytics**. Tide reads token-counter metadata from `sessions/` and `archived_sessions/` under `CODEX_HOME` (default `~/.codex`).
+
+“Today” starts at local midnight. The tokens/minute figure is the recorded total during the trailing five minutes divided by five, not instantaneous generation speed. Twelve five-minute bars cover the last hour, with a zero baseline and an automatically scaled maximum. Values refresh at the configured usage interval.
+
+Repeated cumulative reports and copied records with matching timestamps/counters are deduplicated. Missing initial history, malformed records or scan limits produce a **PARTIAL** label. File reading is bounded to 256 MiB and a five-second budget. Deleted, missing or remote session logs can make local totals incomplete, and Codex’s log format may change.
+
+Turning the option off hides the section and stops subsequent scans. Meter-only mode hides token details. Local token results can still update when the account-limit read fails.
+
+## Privacy and troubleshooting
+
+Tide uses your existing Codex sign-in and the local `codex app-server --stdio` interface to read `account/rateLimits/read`. It does not create model turns, purchase credits or redeem resets. Codex may maintain its own state and refresh authentication during a read.
+
+The package includes no credentials or account data. Local token results contain counters, not conversation text or session paths. Tide does not save new usage-history files.
+
+| Symptom | What to check |
+| --- | --- |
+| OFFLINE or an update error | Confirm Codex is installed, signed in and reachable from the desktop session; then refresh. |
+| STALE | The previous successful allowance reading is retained after a failure or overdue update. Inspect the error text or hover tooltip. |
+| Empty allowance graph | Allow successful readings to accumulate; a newly opened widget has no prior allowance history. |
+| No local token records | Check whether this Codex profile has session logs containing token counters. Remote activity may not be recorded here. |
+| PARTIAL token results | Some records or initial history could not be fully processed. Treat the displayed totals as incomplete. |
+| Text blends into wallpaper | Increase **Appearance → Background panel opacity**. |
+| Old widget after an update | Reload Plasma with `plasmashell --replace`. |
+
+## Development
+
+Build the installable package without connecting an account:
+
+```bash
+python3 build.py
+```
+
+Run the tests:
+
+```bash
+python3 tests/test_usage.py
+python3 tests/test_local_tokens.py
+python3 tests/test_frame_clock.py
+python3 tests/test_qml.py
+```
+
+The Qt-based tests require PySide6 and KDE QML modules. The 22 tests cover allowance parsing, token deduplication, resets, midnight boundaries, rate calculations, partial scans, frame pacing, settings bindings and widget rendering. QML linting:
+
+```bash
+qmllint package/contents/ui/*.qml package/contents/config/config.qml
+```
+
+## Preview and sharing files
+
+- [30-second configuration video](social/tide-widget-configurations.mp4): all five displays, two configurations each, without title or ending screens; vertical 1080p at 60 fps.
+- [Cover image](social/tide-cover.png) and [suggested caption](social/caption.txt).
+- [Sharing folder](social/), including the original longer video.
+
+Previews use actual QML renderers and illustrative data, not live account readings. They demonstrate appearance, not hardware performance. The videos predate local token analytics and do not show that section.
 
 ## Remove
 
-Remove the desktop widget and delete only `local.tide.usage` under your user data directory’s `plasma/plasmoids/`. No background service is installed.
+Remove Tide from the desktop, then delete only the `local.tide.usage` folder under your user data directory’s `plasma/plasmoids/` folder.
 
-## Sources
+## Author and license
 
-- https://learn.chatgpt.com/docs/app-server
-- https://develop.kde.org/docs/plasma/widget/configuration/
-- https://develop.kde.org/docs/plasma/widget/testing/
+Created by **Nicholas Hillsdale**. Distributed under the [MIT License](LICENSE). Tide is an independent community project.
+
+References: [Codex app-server documentation](https://learn.chatgpt.com/docs/app-server), [KDE widget configuration](https://develop.kde.org/docs/plasma/widget/configuration/), [KDE widget testing](https://develop.kde.org/docs/plasma/widget/testing/).
