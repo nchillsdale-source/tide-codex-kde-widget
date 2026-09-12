@@ -7,6 +7,7 @@ import selectors
 import shutil
 import subprocess
 import time
+import sys
 
 
 def normalize(result):
@@ -91,4 +92,10 @@ if __name__ == '__main__':
         result = fetch()
     except (OSError, RuntimeError, TimeoutError) as e:
         result = {'ok': False, 'error': str(e) if not isinstance(e, OSError) else 'Unable to start Codex usage reader.'}
+    if "--no-local-tokens" not in sys.argv:
+        from local_tokens import collect
+        try:
+            result["localTokens"] = collect()
+        except (OSError, ValueError):
+            result["localTokens"] = {"available": False}
     print(json.dumps(result))
