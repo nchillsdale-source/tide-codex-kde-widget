@@ -1,4 +1,4 @@
-# Tide 1.6.0 — Codex & Work Usage
+# Tide 1.7.0 — Codex & Work Usage
 
 An independent, community-built native Plasma 6 desktop usage meter with five selectable visual styles. It uses KDE’s system font, a transparent background, translucent water, and detailed swimming fish with shaded bodies, scales, patterned coloring, gills, eyes, flexible fins and tails. The reset countdown sits beside the update status; there is no “Weekly allowance” title.
 
@@ -68,6 +68,12 @@ Right-click Tide → **Configure Tide / Tide Settings**. Settings are stored per
 - **Glass shading:** default 0%; increase for a darker glass interior.
 - **Background panel opacity:** default 0% for a transparent desktop widget.
 
+### Local token analytics
+
+Analytics can show today’s local input, cached-input, output, reasoning and total tokens, a trailing five-minute tokens/minute average, and twelve five-minute rate bars for the last hour. Enable or disable it under Updates → Show local token usage in Analytics. Suggested Analytics size with this section: 360 × 810. Meter-only mode hides token details.
+
+These are counters from `CODEX_HOME/sessions` and `archived_sessions` (default `~/.codex`), across accounts/models recorded in that local profile. They are not account-wide usage, billing totals or a conversion of allowance percentages. Cached input is already included in input; reasoning is already included in output. Today uses local midnight; rates use event timestamps, not instantaneous generation speed. Duplicate cumulative reports and copied timestamp/counter records are deduplicated. Missing initial history, malformed records or scan limits produce a Partial label. Scans are bounded to 256 MiB / five seconds of reading and do not return conversation text or paths or save new token-history files. Local results can refresh even if the allowance read fails. This log format may change with Codex versions.
+
 ### Updates
 
 - Refresh every 1–30 minutes; default three minutes. The refresh button updates immediately.
@@ -90,7 +96,7 @@ The scope note can be hidden, but the data scope does not change. The open-arrow
 
 ## Validation
 
-`python3 tests/test_usage.py` checks quota parsing, unknown values, legacy data and window ordering. `python3 tests/test_frame_clock.py` tests pacing at display rates from 30–240 Hz, including 59.94 Hz, stable motion speed and stall handling. `python3 tests/test_qml.py` additionally requires PySide6 and KDE QML modules; it checks all settings-page bindings against the schema, window selection, meter-only visibility, independent animation, frame-mode controls, custom-font selection and fallback, style switching and motion, session history, reset boundaries, empty states, and actual water translucency. QML checks: `qmllint package/contents/ui/*.qml package/contents/config/config.qml`.
+`python3 tests/test_local_tokens.py` checks token deduplication, resets, midnight boundaries, rates and partial scans. `python3 tests/test_usage.py` checks quota parsing, unknown values, legacy data and window ordering. `python3 tests/test_frame_clock.py` tests pacing at display rates from 30–240 Hz, including 59.94 Hz, stable motion speed and stall handling. `python3 tests/test_qml.py` additionally requires PySide6 and KDE QML modules; it checks all settings-page bindings against the schema, window selection, meter-only visibility, independent animation, frame-mode controls, custom-font selection and fallback, style switching and motion, session history, reset boundaries, empty states, and actual water translucency. QML checks: `qmllint package/contents/ui/*.qml package/contents/config/config.qml`.
 
 `preview.png` renders the actual QML over an illustrative background with sample 72% remaining allowance. It compares the standard and meter-only views; it is not a live desktop screenshot.
 

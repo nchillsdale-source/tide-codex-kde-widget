@@ -190,6 +190,10 @@ Default: on. Enables glow effects in the decorative displays where supported. An
 
 0–100%; default 0%. Sets the dark panel behind the entire widget in every style. Zero is transparent; increase it when text is hard to read over wallpaper. It is separate from water and style surface opacity.
 
+## Updates — Show local token usage in Analytics
+
+Default: on. Reads token-counter metadata from local Codex session and archived-session logs on each refresh. Shows today’s total, input, cached input, output and reasoning counts. Cached input is included in input; reasoning is included in output. They are not added twice. The rate is recorded total tokens during the last five minutes divided by five; twelve five-minute bars cover the last hour and use a zero baseline with an automatically scaled top value. Counts belong to all accounts and models in this local Codex profile, not account-wide Work activity or billing. Logs may omit remote activity or earlier history. Partial means a malformed record, missing baseline or scan limit prevented a full result. No conversation text or session paths are included in the results, and no new token-history files are created. Turn off to hide the section and stop scans on subsequent refreshes. Meter-only mode hides it. Suggested Analytics height with tokens: 810 pixels.
+
 ## Updates — Refresh interval (minutes)
 
 1–30 minutes; default 3. Controls automatic usage reads. The refresh button requests a reading immediately. Shorter intervals collect Analytics history faster but perform more reads. This is unrelated to animation frame rate.
