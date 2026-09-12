@@ -6,6 +6,9 @@ import org.kde.kirigami as Kirigami
 Item {
     id: view
     property var selected: null
+    property var localTokens: null
+    property bool showLocalTokens: false
+    property double now: Date.now()/1000
     property var windows: []
     property var series: []
     property font textFont: Kirigami.Theme.defaultFont
@@ -105,6 +108,12 @@ Item {
                     }
                 }
             }
+        }
+        TokenUsageView {
+            visible: view.showLocalTokens
+            Layout.fillWidth: true
+            staleAfter: Math.max(420, view.refreshSeconds*2+60)
+            usage: view.localTokens; textFont: view.textFont; textScale: view.textScale; now: view.now
         }
     }
 }

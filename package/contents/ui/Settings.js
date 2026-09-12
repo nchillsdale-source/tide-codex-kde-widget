@@ -1,6 +1,7 @@
 .pragma library
 var defaults = {
   "meterOnly": false,
+  "showLocalTokens": true,
   "showHeader": true,
   "showStatus": true,
   "showPercentage": true,

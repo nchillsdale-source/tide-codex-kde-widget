@@ -12,6 +12,7 @@ Item {
     width: 360; height: 500
     property var snapshot: ({windows: []})
     property var settings: ({})
+    property var localTokens: null
     property var historySamples: []
     onSnapshotChanged: historySamples = History.append(historySamples, snapshot)
     readonly property var trendSeries: History.series(historySamples, selected)
@@ -114,6 +115,7 @@ Item {
                 anchors.fill: parent
                 visible: panel.opt("displayStyle") === 2
                 selected: panel.selected; windows: panel.windows; series: panel.trendSeries
+                localTokens: panel.localTokens; showLocalTokens: panel.opt("showLocalTokens") && !panel.meterOnly; now: panel.now
                 textFont: panel.textFont; textScale: panel.textScale
                 showLabels: !panel.meterOnly; showValue: panel.shown("showPercentage")
                 showBars: panel.meterOnly || panel.opt("showExtraLimits")
