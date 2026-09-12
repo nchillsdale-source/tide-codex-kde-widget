@@ -55,11 +55,21 @@ Item {
     }
     Timer { interval: 15000; running: true; repeat: true; onTriggered: panel.now = Date.now()/1000 }
     HoverHandler { id: hover }
-    ToolTip.visible: hover.hovered && panel.meterOnly
+    ToolTip.visible: hover.hovered && (panel.meterOnly || panel.opt("displayStyle") === 4)
     ToolTip.delay: 900
     ToolTip.text: panel.hoverText
     Rectangle { anchors.fill: parent; radius: 24; color: "#0b1826"; opacity: panel.opt("backgroundOpacity")/100 }
+    MinimalView {
+        objectName: "minimal"
+        anchors.fill: parent; visible: panel.opt("displayStyle") === 4
+        selected: panel.selected; textFont: panel.textFont; textScale: panel.textScale
+        meterOnly: panel.meterOnly; showHeader: panel.opt("showHeader"); showStatus: panel.opt("showStatus")
+        showValue: panel.opt("showPercentage"); showRemaining: panel.opt("showRemaining"); status: panel.status
+        resetText: panel.opt("showResetTime") && panel.selected ? panel.countdown(panel.selected.resetsAt) : ""
+        updatedText: panel.opt("showUpdated") ? (panel.stale ? "Stale" : panel.busy ? "Syncing" : panel.snapshot.updatedAt ? "Updated " + new Date(panel.snapshot.updatedAt*1000).toLocaleTimeString(Qt.locale(),"hh:mm") : "No data") : ""
+    }
     ColumnLayout {
+        visible: panel.opt("displayStyle") !== 4
         anchors.fill: parent; anchors.margins: panel.meterOnly ? 0 : 22; spacing: 10
         RowLayout {
             visible: panel.shown("showHeader") || panel.shown("showStatus")
@@ -87,7 +97,7 @@ Item {
                 anchors.centerIn: parent
                 width: Math.min(parent.width, parent.height); height: width
                 value: panel.remaining / 100; accent: panel.accent
-                active: panel.motion && panel.opt("motionEnabled") && panel.visible
+                active: panel.motion && panel.opt("motionEnabled") && panel.visible && panel.opt("displayStyle") !== 4
                 hasData: !!panel.selected
                 showFish: panel.opt("showFish"); fishCount: panel.opt("fishCount")
                 fishScale: panel.opt("fishScale")/100; fishSpeed: panel.opt("fishSpeed")/100

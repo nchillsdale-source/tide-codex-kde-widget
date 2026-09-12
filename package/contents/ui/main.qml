@@ -40,10 +40,10 @@ PlasmoidItem {
     Timer { interval: Math.max(1, root.config.refreshMinutes) * 60000; running: true; repeat: true; onTriggered: root.refresh() }
     Component.onCompleted: refresh()
     fullRepresentation: Dashboard {
-        Layout.minimumWidth: root.config.meterOnly ? (root.config.displayStyle === 2 ? 280 : 120) : (root.config.displayStyle === 2 ? 360 : 300) * Math.max(1, root.config.textScale/100) * root.fontScale
-        Layout.minimumHeight: root.config.meterOnly ? (root.config.displayStyle === 2 ? 240 : 120) : (root.config.displayStyle === 2 ? 540 : 440) * Math.max(1, root.config.textScale/100) * root.fontScale
-        Layout.preferredWidth: 360
-        Layout.preferredHeight: root.config.meterOnly ? 300 : 500
+        Layout.minimumWidth: root.config.displayStyle === 4 ? (root.config.meterOnly ? 140 : 260) * Math.max(1, root.config.textScale/100) * root.fontScale : root.config.meterOnly ? (root.config.displayStyle === 2 ? 280 : 120) : (root.config.displayStyle === 2 ? 360 : 300) * Math.max(1, root.config.textScale/100) * root.fontScale
+        Layout.minimumHeight: root.config.displayStyle === 4 ? (root.config.meterOnly ? 20 : 116) * Math.max(1, root.config.textScale/100) * root.fontScale : root.config.meterOnly ? (root.config.displayStyle === 2 ? 240 : 120) : (root.config.displayStyle === 2 ? 540 : 440) * Math.max(1, root.config.textScale/100) * root.fontScale
+        Layout.preferredWidth: root.config.displayStyle === 4 ? 280 : 360
+        Layout.preferredHeight: root.config.displayStyle === 4 ? (root.config.meterOnly ? 20 : 116) : root.config.meterOnly ? 300 : 500
         settings: root.config
         snapshot: root.snapshot
         busy: root.busy

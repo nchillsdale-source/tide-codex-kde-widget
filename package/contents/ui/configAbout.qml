@@ -9,11 +9,11 @@ ScrollView {
     ColumnLayout {
         width: page.availableWidth; spacing: 16
         Label { Layout.margins: 16; text: "Tide"; font.pointSize: 24 }
-        Label { Layout.leftMargin: 16; text: "Version 1.5.1" }
+        Label { Layout.leftMargin: 16; text: "Version 1.6.0" }
         Label { Layout.leftMargin: 16; text: "Author: Nicholas Hillsdale" }
         Label {
             Layout.fillWidth: true; Layout.margins: 16; wrapMode: Text.WordWrap
-            text: "A customizable desktop meter for Codex & Work usage: aquarium, lava chamber, analytics and motorsport styles, with custom fonts and display-synced animation."
+            text: "A customizable desktop meter for Codex & Work usage: aquarium, lava chamber, analytics, motorsport and minimal styles, with custom fonts and display-synced animation."
         }
         Label {
             Layout.fillWidth: true; Layout.margins: 16; wrapMode: Text.WordWrap

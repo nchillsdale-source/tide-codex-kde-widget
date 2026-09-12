@@ -18,7 +18,7 @@ ScrollView {
         Label { Layout.fillWidth: true; Layout.margins: 12; wrapMode: Text.WordWrap; text: "Choose a display for the same live Codex & Work allowance. All styles support meter-only mode, fonts, text visibility and animation frame modes." }
         Kirigami.FormLayout {
             Layout.fillWidth: true; Layout.margins: 12
-            ComboBox { id: styleChoice; objectName: "styleChoice"; Kirigami.FormData.label: "Display style:"; model: ["Aquarium", "Lava chamber", "Analytics", "Motorsport"]; Layout.preferredWidth: 280 }
+            ComboBox { id: styleChoice; objectName: "styleChoice"; Kirigami.FormData.label: "Display style:"; model: ["Aquarium", "Lava chamber", "Analytics", "Motorsport", "Minimal"]; Layout.preferredWidth: 280 }
             CheckBox { id: motion; enabled: styleChoice.currentIndex === 1 || styleChoice.currentIndex === 3; text: "Animate this style" }
             SpinBox { id: speed; enabled: styleChoice.currentIndex === 1 || styleChoice.currentIndex === 3; Kirigami.FormData.label: "Animation speed (%):"; from: 20; to: 200; editable: true }
             SpinBox { id: opacityControl; enabled: styleChoice.currentIndex === 1 || styleChoice.currentIndex === 3; Kirigami.FormData.label: "Surface opacity (%):"; from: 20; to: 100; editable: true }
@@ -27,11 +27,11 @@ ScrollView {
         }
         Label {
             Layout.fillWidth: true; Layout.margins: 12; wrapMode: Text.WordWrap
-            text: ["Aquarium: remaining allowance sets the water level. Fish and water options are on the Aquarium tab.", "Lava chamber: remaining allowance sets the molten lava level. Crust and embers animate inside the chamber.", "Analytics: current quota bars and a session trend from successful updates. History starts when this widget opens; the line appears after 8 readings. Reset windows are kept separate.", "Motorsport: the inner fuel-style gauge shows remaining allowance. The open-wheel car laps the circuit independently of usage."][styleChoice.currentIndex] || ""
+            text: ["Aquarium: remaining allowance sets the water level. Fish and water options are on the Aquarium tab.", "Lava chamber: remaining allowance sets the molten lava level. Crust and embers animate inside the chamber.", "Analytics: current quota bars and a session trend from successful updates. History starts when this widget opens; the line appears after 8 readings. Reset windows are kept separate.", "Motorsport: the inner fuel-style gauge shows remaining allowance. The open-wheel car laps the circuit independently of usage.", "Minimal: compact percentage, a slim quota bar, and reset/update times. No decorative motion, secondary bars or action buttons; hover for connection details."][styleChoice.currentIndex] || ""
         }
         Label { Layout.alignment: Qt.AlignHCenter; text: "Style preview · sample 72% remaining" }
         LiquidOrb {
-            visible: styleChoice.currentIndex !== 2
+            visible: styleChoice.currentIndex !== 2 && styleChoice.currentIndex !== 4
             Layout.alignment: Qt.AlignHCenter; Layout.preferredWidth: 220; Layout.preferredHeight: 220
             value: 0.72; hasData: true
             displayStyle: styleChoice.currentIndex; styleAnimate: motion.checked
@@ -48,6 +48,12 @@ ScrollView {
             windows: [{name:"Codex & Work",window:"Weekly",remaining:72},{name:"Spark",window:"5-hour",remaining:96}]
             series: [{time:1000,remaining:94},{time:1180,remaining:92},{time:1360,remaining:88},{time:1540,remaining:85},{time:1720,remaining:82},{time:1900,remaining:78},{time:2080,remaining:75},{time:2260,remaining:72}]
             }
+        }
+        Rectangle {
+            visible: styleChoice.currentIndex === 4
+            Layout.alignment: Qt.AlignHCenter; Layout.preferredWidth: 280; Layout.preferredHeight: 116
+            color: "#111d2b"; radius: 8
+            MinimalView { anchors.fill: parent; selected: ({window:"Weekly",remaining:72}); status:"LIVE"; resetText:"Resets in 4d 17h"; updatedText:"Updated 11:35" }
         }
         Button {
             Layout.leftMargin: 12; text: "Restore style defaults"

@@ -394,6 +394,12 @@ var entries = [
     ]
   },
   {
+    "section": "Styles",
+    "title": "Minimal display",
+    "body": "A compact, professional display with a remaining percentage, thin quota bar, and reset/update times. Suggested size: 280 × 116. Keeps the transparent panel and system/custom fonts. Header, status dot, percentage, caption, reset and updated visibility switches apply. To stay compact, secondary bars, credits, action buttons and scope/error paragraphs are omitted; hover for status, reset and error details. No continuous animation is needed. Meter-only mode keeps just the bar, with a 140 × 20 minimum. Plasma may preserve the old size when switching styles; resize the desktop widget to make it small.",
+    "keys": []
+  },
+  {
     "section": "About",
     "title": "Author, version and license",
     "body": "About lists Nicholas Hillsdale as author, the installed Tide version, MIT license, data scope and reload instructions. Help and About do not change settings.",
